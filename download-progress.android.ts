@@ -12,7 +12,7 @@ export class DownloadProgress {
 
   public downloadFile(
     url: string,
-    headers?: any,
+    options?: any,
     destinationFilePath?: string
   ): Promise<fs.File> {
     var worker;
@@ -28,7 +28,7 @@ export class DownloadProgress {
 
       worker.postMessage({
         url,
-        headers: headers,
+        options: options,
         destinationFilePath: destinationFilePath
       });
       worker.onmessage = (msg: any) => {
