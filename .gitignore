@@ -1,8 +1,6 @@
 .vscode
 .idea
 .DS_Store
-*.js
-!src/android-worker.js
 *.js.map
 *.log
 *package-lock.json
