@@ -31,16 +31,26 @@ global.onmessage = function(msg) {
     var javaOptions = new org.nativescript.widgets.Async.Http.RequestOptions();
     javaOptions.url = url;
 
+    console.log(options);
     // allow methods other than GET
-    javaOptions.method = options && options.method ? options.method : "GET";
-
-    // allow optional headers to be sent
-    if (options.headers) {
-      javaOptions.headers = options.headers;
-    }
 
     var javaUrl = new java.net.URL(url);
     var connection = javaUrl.openConnection();
+    // allow optional headers to be sent
+    if (options) {
+      const { headers, method } = options;
+      if (method) {
+        // this is GET by default
+        javaOptions.method = method;
+        connection.setRequestMethod(method);
+      }
+      if (headers) {
+        for (var key in headers) {
+          connection.setRequestProperty(key, headers[key]);
+        }
+      }
+    }
+
     connection.connect();
     if (connection.getResponseCode() != java.net.HttpURLConnection.HTTP_OK) {
       throw "Server returned HTTP " + connection.getResponseCode();
