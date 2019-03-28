@@ -31,7 +31,6 @@ global.onmessage = function(msg) {
     var javaOptions = new org.nativescript.widgets.Async.Http.RequestOptions();
     javaOptions.url = url;
 
-    console.log(options);
     // allow methods other than GET
 
     var javaUrl = new java.net.URL(url);
